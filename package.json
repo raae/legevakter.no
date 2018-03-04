@@ -1,0 +1,23 @@
+{
+  "name": "legevakter.no",
+  "description": "Web app for finding the closest emergency room (in Norway)",
+  "version": "1.0.0",
+  "author": "Benedicte Raae (lillylabs.no)",
+  "dependencies": {
+    "gatsby": "^1.9.223",
+    "gatsby-link": "^1.6.38",
+    "gatsby-plugin-react-helmet": "^2.0.6",
+    "react-helmet": "^5.2.0"
+  },
+  "keywords": ["gatsby", "data.helsenorge.no", "opendata"],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "prettier": "^1.11.1"
+  }
+}
