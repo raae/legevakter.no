@@ -129,6 +129,76 @@ const IndexPage = () => (
       src="https://platform.twitter.com/widgets.js"
       charset="utf-8"
     />
+    <blockquote class="twitter-tweet" data-lang="en">
+      <p lang="en" dir="ltr">
+        🏥 [<a href="https://t.co/fvDhn5VkP0">https://t.co/fvDhn5VkP0</a> ]
+        Getting started with{" "}
+        <a href="https://twitter.com/gatsbyjs?ref_src=twsrc%5Etfw">@gatsbyjs</a>{" "}
+        was easy. Used the Getting Started Guide on{" "}
+        <a href="https://t.co/fs4tkPp92u">https://t.co/fs4tkPp92u</a>. Changed
+        the text and the header color to give it that ER feel, so far so good.{" "}
+        <a href="https://twitter.com/hashtag/JAMStack?src=hash&amp;ref_src=twsrc%5Etfw">
+          #JAMStack
+        </a>{" "}
+        <a href="https://twitter.com/hashtag/GatsbyJS?src=hash&amp;ref_src=twsrc%5Etfw">
+          #GatsbyJS
+        </a>
+      </p>&mdash; Benedicte Raae (@raae){" "}
+      <a href="https://twitter.com/raae/status/970273972549029888?ref_src=twsrc%5Etfw">
+        March 4, 2018
+      </a>
+    </blockquote>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    />
+
+    <blockquote class="twitter-tweet" data-lang="en">
+      <p lang="en" dir="ltr">
+        🏥 [<a href="https://t.co/fvDhn5VkP0">https://t.co/fvDhn5VkP0</a>]
+        Created a git repo by typing &quot;hub create&quot; (<a href="https://t.co/ngSINy6QNm">
+          https://t.co/ngSINy6QNm
+        </a>) and then set up continuous deployment to{" "}
+        <a href="https://twitter.com/Netlify?ref_src=twsrc%5Etfw">@Netlify</a>{" "}
+        through their site - and boom{" "}
+        <a href="https://t.co/TKHyRol0kd">https://t.co/TKHyRol0kd</a> was up!
+        Love{" "}
+        <a href="https://twitter.com/hashtag/Netlify?src=hash&amp;ref_src=twsrc%5Etfw">
+          #Netlify
+        </a>
+      </p>&mdash; Benedicte Raae (@raae){" "}
+      <a href="https://twitter.com/raae/status/970274672314118144?ref_src=twsrc%5Etfw">
+        March 4, 2018
+      </a>
+    </blockquote>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    />
+
+    <blockquote class="twitter-tweet" data-lang="en">
+      <p lang="en" dir="ltr">
+        🏥 [<a href="https://t.co/fvDhn5VkP0">https://t.co/fvDhn5VkP0</a>]
+        Updated the DNS records on{" "}
+        <a href="https://twitter.com/domeneshop?ref_src=twsrc%5Etfw">
+          @domeneshop
+        </a>{" "}
+        and I guess now I just have to give it some time... So far: 1,5 hours!{" "}
+        <a href="https://twitter.com/hashtag/JAMStack?src=hash&amp;ref_src=twsrc%5Etfw">
+          #JAMStack
+        </a>
+      </p>&mdash; Benedicte Raae (@raae){" "}
+      <a href="https://twitter.com/raae/status/970275625469710336?ref_src=twsrc%5Etfw">
+        March 4, 2018
+      </a>
+    </blockquote>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    />
   </div>
 );
 
