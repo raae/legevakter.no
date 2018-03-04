@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Default Starter"
+    title: "Legevakter i Norge",
+    description: "Finn nærmeste legevakt.",
+    keywords: "legevakt, skade, akutt"
   },
   plugins: ["gatsby-plugin-react-helmet"]
 };
