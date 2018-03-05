@@ -14,6 +14,17 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
       createNode({
         id: item.OrganizationNumber,
         name: item.DisplayName,
+        address: {
+          street: item.VisitAddressStreet,
+          postalCode: item.VisitAddressPostNr,
+          postalTown: item.VisitAddressPostName,
+          comment: item.VisitAddressDescription
+        },
+        phone: item.Phone,
+        openingHours: {
+          hours: item.OpeningHours,
+          comment: item.OpeningHoursComment
+        },
         parent: null,
         children: [],
         internal: {

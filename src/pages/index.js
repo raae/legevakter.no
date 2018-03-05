@@ -19,6 +19,11 @@ const IndexPage = () => (
     </p>
     <h2>JAMStack plan</h2>
     <p>Gatsby deployed on Netlify with Mapbox for the map feature.</p>
+    <h2>Status</h2>
+    <p>
+      View current state of the <Link to="app">app</Link>.
+    </p>
+    <p>As of March 5th it is a crude list of all Norwegian Emergency Rooms.</p>
     <h2>Journal</h2>
     <p>
       I tweet as I code, resulting in a
