@@ -12,12 +12,16 @@
   "keywords": ["gatsby", "data.helsenorge.no", "opendata"],
   "license": "MIT",
   "main": "n/a",
+  "jest": {
+    "testPathIgnorePatterns": ["/.cache/"]
+  },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gatsby develop",
+    "test": "jest"
   },
   "devDependencies": {
+    "jest": "^22.4.2",
     "prettier": "^1.11.1"
   }
 }
