@@ -1,4 +1,4 @@
-import { startOfWeek, addMinutes } from "date-fns";
+import { startOfWeek, addMinutes, isWithinRange } from "date-fns";
 
 export const parseOpeningHours = (openingHours, today) => {
   const baseline = startOfWeek(today, { weekStartsOn: 1 });
@@ -9,4 +9,12 @@ export const parseOpeningHours = (openingHours, today) => {
       opening: addMinutes(baseline, opening),
       closing: addMinutes(baseline, closing)
     }));
+};
+
+export const isOpen = (openingHours, datetime) => {
+  return openingHours.reduce(
+    (acc, { opening, closing }) =>
+      acc || isWithinRange(datetime, opening, closing),
+    false
+  );
 };
