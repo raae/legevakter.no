@@ -1,7 +1,12 @@
 import React from "react";
 import Link from "gatsby-link";
 import { format, isSameDay } from "date-fns";
+import nbLocale from "date-fns/locale/nb";
 import { parseOpeningHours } from "../../helpers/health-service";
+
+const formatOptions = {
+  locale: nbLocale
+};
 
 const HealthService = ({ name, phone, address, openingHours }) => (
   <article>
@@ -22,9 +27,10 @@ const HealthService = ({ name, phone, address, openingHours }) => (
       {parseOpeningHours(openingHours.hours, new Date()).map(
         ({ opening, closing }, index) => (
           <li key={index}>
-            {format(opening, "dddd: HH:mm")} - {format(closing, "HH:mm")}
+            {format(opening, "dddd: HH:mm", formatOptions)}
+            {format(closing, " - HH:mm")}
             {!isSameDay(opening, closing) && (
-              <span>{format(closing, " (dddd)")}</span>
+              <span>{format(closing, " (dddd)", formatOptions)}</span>
             )}
           </li>
         )
