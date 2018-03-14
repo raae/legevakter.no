@@ -3,6 +3,7 @@ import Link from "gatsby-link";
 import { format, isSameDay } from "date-fns";
 import nbLocale from "date-fns/locale/nb";
 import { parseOpeningHours, isOpen } from "../../helpers/health-service";
+import NoSSR from "../commons/NoSSR";
 
 const formatOptions = {
   locale: nbLocale
@@ -14,10 +15,12 @@ const OpeningHours = ({ hours, comment }) => {
   const open = isOpen(parsedHours, now);
   return (
     <div>
-      <p>
-        <strong>{open ? "ÅPENT" : "STENGT"}</strong>
-        &nbsp;(i dag {format(now, "dddd HH:mm", formatOptions)}).
-      </p>
+      <NoSSR>
+        <p>
+          <strong>{open ? "ÅPENT" : "STENGT"}</strong>
+          &nbsp;(i dag {format(now, "dddd HH:mm", formatOptions)}).
+        </p>
+      </NoSSR>
       <ul>
         {parsedHours.map(({ opening, closing }, index) => (
           <li key={index}>
