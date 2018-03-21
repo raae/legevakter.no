@@ -45,13 +45,13 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * -2
   },
   avatar: {
-    width: theme.spacing.unit * 3,
-    height: theme.spacing.unit * 3,
+    width: theme.spacing.unit * 3.5,
+    height: theme.spacing.unit * 3.5,
     marginRight: theme.spacing.unit,
     marginLeft: theme.spacing.unit * -1
   },
   phone: {
-    width: theme.spacing.unit * 2.5
+    width: theme.spacing.unit * 2
   },
   expand: {
     transform: "rotate(0deg)",
