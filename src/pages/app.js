@@ -23,10 +23,11 @@ export const query = graphql`
             hours
             comment
           }
-          address {
+          location {
             street
-            postalCode
-            postalTown
+            town
+            municipality
+            county
           }
         }
       }
