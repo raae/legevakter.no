@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 
 import Header from "../components/Header";
-import "./index.css";
 
 const TemplateWrapper = ({ data, children }) => (
   <div>
@@ -13,16 +12,7 @@ const TemplateWrapper = ({ data, children }) => (
       <meta name="keywords" content={data.site.siteMetadata.keywords} />
     </Helmet>
     <Header />
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: "32em",
-        padding: "0px 1.0875rem 1.45rem",
-        paddingTop: 0
-      }}
-    >
-      {children()}
-    </div>
+    <div>{children()}</div>
   </div>
 );
 
