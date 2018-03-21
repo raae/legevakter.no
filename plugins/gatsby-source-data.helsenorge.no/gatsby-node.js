@@ -14,11 +14,11 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
       createNode({
         id: item.OrganizationNumber,
         name: item.DisplayName,
-        address: {
+        location: {
           street: item.VisitAddressStreet,
-          postalCode: item.VisitAddressPostNr,
-          postalTown: item.VisitAddressPostName,
-          comment: item.VisitAddressDescription
+          town: item.VisitAddressPostName,
+          municipality: item.MunicipalityName,
+          county: item.CountyName
         },
         phone: item.Phone,
         openingHours: {

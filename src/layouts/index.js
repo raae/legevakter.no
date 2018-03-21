@@ -1,28 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import { CssBaseline, withStyles } from "material-ui";
 
 import Header from "../components/Header";
-import "./index.css";
 
-const TemplateWrapper = ({ data, children }) => (
+const styles = theme => ({
+  main: {
+    maxWidth: "32rem"
+  }
+});
+
+const TemplateWrapper = ({ data, children, classes }) => (
   <div>
+    <CssBaseline />
+
     <Helmet>
       <meta name="title" content={data.site.siteMetadata.title} />
       <meta name="description" content={data.site.siteMetadata.description} />
       <meta name="keywords" content={data.site.siteMetadata.keywords} />
     </Helmet>
-    <Header />
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: "32em",
-        padding: "0px 1.0875rem 1.45rem",
-        paddingTop: 0
-      }}
-    >
+
+    <main className={classes.main}>
+      <Header />
       {children()}
-    </div>
+    </main>
   </div>
 );
 
@@ -42,4 +44,4 @@ export const query = graphql`
   }
 `;
 
-export default TemplateWrapper;
+export default withStyles(styles)(TemplateWrapper);

@@ -7,14 +7,22 @@
     "date-fns": "^1.29.0",
     "gatsby": "^1.9.223",
     "gatsby-link": "^1.6.38",
+    "gatsby-plugin-material-ui": "^0.1.3",
     "gatsby-plugin-react-helmet": "^2.0.6",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react-helmet": "^5.2.0"
   },
-  "keywords": ["gatsby", "data.helsenorge.no", "opendata"],
+  "keywords": [
+    "gatsby",
+    "data.helsenorge.no",
+    "opendata"
+  ],
   "license": "MIT",
   "main": "n/a",
   "jest": {
-    "testPathIgnorePatterns": ["/.cache/"]
+    "testPathIgnorePatterns": [
+      "/.cache/"
+    ]
   },
   "scripts": {
     "build": "gatsby build",
