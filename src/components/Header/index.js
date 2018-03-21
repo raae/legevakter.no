@@ -1,33 +1,64 @@
 import React from "react";
 import Link from "gatsby-link";
+import { AppBar, Toolbar, Typography, Button, withStyles } from "material-ui";
 
-const Header = () => (
-  <div
-    style={{
-      background: "#CC0000",
-      marginBottom: "1.45rem"
-    }}
-  >
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: "32em",
-        padding: "1.45rem 1.0875rem"
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
+const styles = theme => ({
+  baseline: {
+    display: "flex",
+    alignItems: "baseline"
+  },
+  title: {
+    marginRight: theme.spacing.unit * 2,
+    textDecoration: "inherit",
+    transition: "all .2s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.05)"
+    }
+  },
+  button: {
+    margin: theme.spacing.unit,
+    border: "1px solid transparent"
+  },
+  buttonActive: {
+    border: "1px solid"
+  }
+});
+
+const Header = ({ classes }) => (
+  <AppBar>
+    <Toolbar>
+      <div className={classes.baseline}>
+        <Typography
+          className={classes.title}
+          variant="title"
+          color="inherit"
+          component={Link}
           to="/"
-          style={{
-            color: "white",
-            textDecoration: "none"
-          }}
         >
           Legevakter i Norge
-        </Link>
-      </h1>
-    </div>
-  </div>
+        </Typography>
+        <Button
+          exact
+          className={classes.button}
+          activeClassName={classes.buttonActive}
+          color="inherit"
+          component={Link}
+          to="/"
+        >
+          About
+        </Button>
+        <Button
+          className={classes.button}
+          activeClassName={classes.buttonActive}
+          color="inherit"
+          component={Link}
+          to="/app"
+        >
+          The app
+        </Button>
+      </div>
+    </Toolbar>
+  </AppBar>
 );
 
-export default Header;
+export default withStyles(styles)(Header);
