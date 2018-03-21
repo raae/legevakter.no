@@ -1,11 +1,13 @@
 import React from "react";
 import Link from "gatsby-link";
 import { AppBar, Toolbar, Typography, Button, withStyles } from "material-ui";
+import InfoOutlineIcon from "material-ui-icons/InfoOutline";
 
 const styles = theme => ({
-  baseline: {
+  toolbar: {
     display: "flex",
-    alignItems: "baseline"
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   title: {
     marginRight: theme.spacing.unit * 2,
@@ -14,49 +16,24 @@ const styles = theme => ({
     "&:hover": {
       transform: "scale(1.05)"
     }
-  },
-  button: {
-    margin: theme.spacing.unit,
-    border: "1px solid transparent"
-  },
-  buttonActive: {
-    border: "1px solid"
   }
 });
 
 const Header = ({ classes }) => (
-  <AppBar>
-    <Toolbar>
-      <div className={classes.baseline}>
-        <Typography
-          className={classes.title}
-          variant="title"
-          color="inherit"
-          component={Link}
-          to="/"
-        >
-          Legevakter i Norge
-        </Typography>
-        <Button
-          exact
-          className={classes.button}
-          activeClassName={classes.buttonActive}
-          color="inherit"
-          component={Link}
-          to="/"
-        >
-          About
-        </Button>
-        <Button
-          className={classes.button}
-          activeClassName={classes.buttonActive}
-          color="inherit"
-          component={Link}
-          to="/app"
-        >
-          The app
-        </Button>
-      </div>
+  <AppBar position="sticky">
+    <Toolbar className={classes.toolbar}>
+      <Typography
+        className={classes.title}
+        variant="title"
+        color="inherit"
+        component={Link}
+        to="/"
+      >
+        Legevakter i Norge
+      </Typography>
+      <Button color="inherit" component={Link} to="/info">
+        <InfoOutlineIcon />
+      </Button>
     </Toolbar>
   </AppBar>
 );

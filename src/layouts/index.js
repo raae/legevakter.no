@@ -7,7 +7,6 @@ import Header from "../components/Header";
 
 const styles = theme => ({
   main: {
-    marginTop: 80,
     maxWidth: "32rem"
   }
 });
@@ -15,13 +14,17 @@ const styles = theme => ({
 const TemplateWrapper = ({ data, children, classes }) => (
   <div>
     <CssBaseline />
+
     <Helmet>
       <meta name="title" content={data.site.siteMetadata.title} />
       <meta name="description" content={data.site.siteMetadata.description} />
       <meta name="keywords" content={data.site.siteMetadata.keywords} />
     </Helmet>
-    <Header />
-    <main className={classes.main}>{children()}</main>
+
+    <main className={classes.main}>
+      <Header />
+      {children()}
+    </main>
   </div>
 );
 
