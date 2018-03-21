@@ -1,8 +1,15 @@
 import React from "react";
 import Link from "gatsby-link";
+import { Typography, Paper, withStyles } from "material-ui";
 
-const IndexPage = () => (
-  <div>
+const styles = theme => ({
+  root: {
+    padding: theme.spacing.unit * 2
+  }
+});
+
+const IndexPage = ({ classes }) => (
+  <Typography component="div" className={classes.root}>
     <h1>Hello peeps</h1>
     <p>
       Once apon a time I created an iPhone app called "Legevakter i Norge"
@@ -26,12 +33,12 @@ const IndexPage = () => (
     <p>As of March 5th it is a crude list of all Norwegian Emergency Rooms.</p>
     <h2>Journal</h2>
     <p>
-      I tweet as I code, resulting in a
+      I tweet as I code, resulting in a&nbsp;
       <a href="https://twitter.com/i/moments/970276387901886465">
         journal you can find on Twitter.
       </a>
     </p>
-  </div>
+  </Typography>
 );
 
-export default IndexPage;
+export default withStyles(styles)(IndexPage);
