@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
-import { CssBaseline, withStyles } from "material-ui";
+import { withStyles } from "material-ui";
+import withRoot from "../withRoot";
 
 import Header from "../components/Header";
 
@@ -13,8 +14,6 @@ const styles = theme => ({
 
 const TemplateWrapper = ({ data, children, classes }) => (
   <div>
-    <CssBaseline />
-
     <Helmet>
       <meta name="title" content={data.site.siteMetadata.title} />
       <meta name="description" content={data.site.siteMetadata.description} />
@@ -44,4 +43,4 @@ export const query = graphql`
   }
 `;
 
-export default withStyles(styles)(TemplateWrapper);
+export default withRoot(withStyles(styles)(TemplateWrapper));
