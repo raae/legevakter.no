@@ -11,6 +11,7 @@ import {
   IconButton,
   withStyles
 } from "material-ui";
+import { green, red } from "material-ui/colors";
 import classnames from "classnames";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import PhoneIcon from "material-ui-icons/Phone";
@@ -26,8 +27,12 @@ const formatOptions = {
 };
 
 const styles = theme => ({
-  card: {
+  cardOpen: {
     margin: theme.spacing.unit * 2
+  },
+  cardClosed: {
+    margin: theme.spacing.unit * 2,
+    backgroundColor: theme.palette.grey[100]
   },
   header: {
     display: "flex",
@@ -38,6 +43,12 @@ const styles = theme => ({
   },
   town: {
     textTransform: "capitalize"
+  },
+  openBadge: {
+    color: green[800]
+  },
+  closedBadge: {
+    color: red[800]
   },
   actions: {
     display: "flex",
@@ -76,7 +87,10 @@ class HealthService extends React.Component {
   render() {
     const { name, phone, location, openingHours, classes } = this.props;
     return (
-      <Card component="article" className={classes.card}>
+      <Card
+        component="article"
+        className={openingHours.open ? classes.cardOpen : classes.cardClosed}
+      >
         <CardContent>
           <div className={classes.header}>
             <Typography className={classes.location} color="textSecondary">
@@ -88,7 +102,11 @@ class HealthService extends React.Component {
               )}
             </Typography>
             <NoSSR>
-              <Typography>
+              <Typography
+                className={
+                  openingHours.open ? classes.openBadge : classes.closedBadge
+                }
+              >
                 <strong>{openingHours.open ? "ÅPENT" : "STENGT"}</strong>
               </Typography>
             </NoSSR>
