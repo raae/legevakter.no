@@ -19,6 +19,7 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
           town: item.VisitAddressPostName,
           municipality: item.MunicipalityName,
           county: item.CountyName,
+          countyCode: parseInt(item.CountyCode),
           lat: item.Latitude,
           lng: item.Longitude
         },

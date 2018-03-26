@@ -60,7 +60,7 @@ export const query = graphql`
         keywords
       }
     }
-    allHealthService {
+    allHealthService(sort: { fields: [location___countyCode], order: DESC }) {
       edges {
         node {
           name
@@ -74,6 +74,7 @@ export const query = graphql`
             town
             municipality
             county
+            countyCode
             lng
             lat
           }
