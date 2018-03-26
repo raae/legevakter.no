@@ -5,8 +5,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { withStyles } from "material-ui";
 import constants from "./../../constants";
 
-mapboxgl.accessToken = constants.mapBoxAccessToken;
-
 const styles = theme => ({
   root: {
     height: "100%",
@@ -25,6 +23,8 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    mapboxgl.accessToken = constants.mapBoxAccessToken;
+
     const { lng, lat, zoom } = this.state;
     const { allHealthService } = this.props;
 
