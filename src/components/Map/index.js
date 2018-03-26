@@ -34,6 +34,12 @@ class Map extends React.Component {
       zoom
     });
 
+    map.addControl(
+      new mapboxgl.NavigationControl({
+        showCompass: false
+      })
+    );
+
     map.on("move", () => {
       const { lng, lat } = map.getCenter();
 
@@ -42,8 +48,6 @@ class Map extends React.Component {
         lat: lat.toFixed(4),
         zoom: map.getZoom().toFixed(2)
       });
-
-      console.log(this.state);
     });
   }
 
