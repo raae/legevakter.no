@@ -18,7 +18,9 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
           street: item.VisitAddressStreet,
           town: item.VisitAddressPostName,
           municipality: item.MunicipalityName,
-          county: item.CountyName
+          county: item.CountyName,
+          lat: item.Latitude,
+          lng: item.Longitude
         },
         phone: item.Phone,
         openingHours: {

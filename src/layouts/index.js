@@ -28,7 +28,7 @@ const styles = theme => ({
   }
 });
 
-const TemplateWrapper = ({ data, children, classes }) => (
+const TemplateWrapper = ({ data, children, classes, ...props }) => (
   <div className={classes.root}>
     <Helmet>
       <meta name="title" content={data.site.siteMetadata.title} />
@@ -38,10 +38,12 @@ const TemplateWrapper = ({ data, children, classes }) => (
 
     <main className={classes.main}>
       <Header />
-      {children()}
+      {children({ ...props, allHealthService: data.allHealthService })}
     </main>
 
-    <div className={classes.map}>{<Map />}</div>
+    <div className={classes.map}>
+      {<Map allHealthService={data.allHealthService} />}
+    </div>
   </div>
 );
 
@@ -56,6 +58,26 @@ export const query = graphql`
         title
         description
         keywords
+      }
+    }
+    allHealthService {
+      edges {
+        node {
+          name
+          phone
+          openingHours {
+            hours
+            comment
+          }
+          location {
+            street
+            town
+            municipality
+            county
+            lng
+            lat
+          }
+        }
       }
     }
   }

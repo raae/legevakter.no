@@ -26,6 +26,7 @@ class Map extends React.Component {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
+    const { allHealthService } = this.props;
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -48,6 +49,14 @@ class Map extends React.Component {
         lat: lat.toFixed(4),
         zoom: map.getZoom().toFixed(2)
       });
+    });
+
+    allHealthService.edges.forEach(({ node }) => {
+      if (node.location.lng && node.location.lat) {
+        new mapboxgl.Marker()
+          .setLngLat([node.location.lng, node.location.lat])
+          .addTo(map);
+      }
     });
   }
 
