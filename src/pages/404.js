@@ -1,10 +1,17 @@
 import React from "react";
+import { Typography, Paper, withStyles } from "material-ui";
 
-const NotFoundPage = () => (
-  <div>
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </div>
+const styles = theme => ({
+  root: {
+    padding: theme.spacing.unit * 2
+  }
+});
+
+const NotFoundPage = ({ classes }) => (
+  <Typography component="div" className={classes.root}>
+    <h1>Ojsann</h1>
+    <p>Denne url'en eksisterer ikke.</p>
+  </Typography>
 );
 
-export default NotFoundPage;
+export default withStyles(styles)(NotFoundPage);
