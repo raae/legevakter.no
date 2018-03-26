@@ -5,11 +5,13 @@
   "author": "Benedicte Raae (lillylabs.no)",
   "dependencies": {
     "date-fns": "^1.29.0",
+    "dotenv": "^5.0.1",
     "gatsby": "^1.9.223",
     "gatsby-link": "^1.6.38",
-    "jss": "latest",
-    "material-ui": "next",
     "gatsby-plugin-react-helmet": "^2.0.6",
+    "jss": "latest",
+    "mapbox-gl": "^0.44.1",
+    "material-ui": "next",
     "material-ui-icons": "^1.0.0-beta.36",
     "react-helmet": "^5.2.0",
     "react-jss": "latest"

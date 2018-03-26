@@ -3,10 +3,10 @@ import Link from "gatsby-link";
 import { parseOpeningHours, isOpen } from "../helpers/health-service";
 import HealthService from "../components/HealthService";
 
-const AppPage = ({ data }) => {
+const AppPage = ({ allHealthService }) => {
   return (
     <div>
-      {data.allHealthService.edges.map(({ node }, index) => {
+      {allHealthService.edges.map(({ node }, index) => {
         const now = new Date();
         if (!Array.isArray(node.openingHours.hours)) {
           const parsedHours = parseOpeningHours(node.openingHours.hours, now);
@@ -20,28 +20,5 @@ const AppPage = ({ data }) => {
     </div>
   );
 };
-
-export const query = graphql`
-  query HealthServiceQuery {
-    allHealthService {
-      edges {
-        node {
-          name
-          phone
-          openingHours {
-            hours
-            comment
-          }
-          location {
-            street
-            town
-            municipality
-            county
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default AppPage;
