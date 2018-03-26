@@ -16,9 +16,11 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "flex-start"
   },
-  logo: {
-    fontSize: "150%",
+  homeButton: {
     marginLeft: theme.spacing.unit * -1.5
+  },
+  logo: {
+    fontSize: "150%"
   },
   title: {
     marginRight: theme.spacing.unit * 2,
@@ -32,7 +34,13 @@ const styles = theme => ({
 const Header = ({ classes }) => (
   <AppBar position="sticky">
     <Toolbar className={classes.toolbar}>
-      <IconButton size="large" color="inherit" component={Link} to="/">
+      <IconButton
+        className={classes.homeButton}
+        size="large"
+        color="inherit"
+        component={Link}
+        to="/"
+      >
         <LocalHospitalIcon className={classes.logo} />
       </IconButton>
       <Typography
