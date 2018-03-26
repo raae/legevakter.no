@@ -5,15 +5,31 @@ import { withStyles } from "material-ui";
 import withRoot from "../withRoot";
 
 import Header from "../components/Header";
+import Map from "../components/Map";
 
 const styles = theme => ({
+  root: {
+    display: "flex",
+    alignItems: "stretch",
+    height: "100vh",
+    width: "100vw"
+  },
   main: {
-    maxWidth: "32rem"
+    flex: "0 0 45%",
+    maxWidth: "32rem",
+    minWidth: "25rem",
+    overflowY: "auto",
+    borderRight: `1px solid ${theme.palette.divider}`,
+    background: theme.palette.background.default
+  },
+  map: {
+    height: "100%",
+    flex: 1
   }
 });
 
 const TemplateWrapper = ({ data, children, classes }) => (
-  <div>
+  <div className={classes.root}>
     <Helmet>
       <meta name="title" content={data.site.siteMetadata.title} />
       <meta name="description" content={data.site.siteMetadata.description} />
@@ -24,6 +40,8 @@ const TemplateWrapper = ({ data, children, classes }) => (
       <Header />
       {children()}
     </main>
+
+    <div className={classes.map}>{<Map />}</div>
   </div>
 );
 
