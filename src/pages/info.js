@@ -8,7 +8,7 @@ const styles = theme => ({
   }
 });
 
-const IndexPage = ({ classes }) => (
+const InfoPage = ({ classes }) => (
   <Typography component="div" className={classes.root}>
     <h1>Hello peeps</h1>
     <p>
@@ -41,4 +41,4 @@ const IndexPage = ({ classes }) => (
   </Typography>
 );
 
-export default withStyles(styles)(IndexPage);
+export default withStyles(styles)(InfoPage);
