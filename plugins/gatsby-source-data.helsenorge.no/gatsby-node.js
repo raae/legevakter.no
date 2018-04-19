@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
 const crypto = require("crypto");
+const path = require("path");
 
-createHealthService = data => {
+createHealthServiceNode = data => {
   const nodeFields = {
     id: data.OrganizationNumber,
     name: data.DisplayName,
@@ -34,7 +35,7 @@ createHealthService = data => {
   };
 };
 
-createCounty = data => {
+createCountyNode = data => {
   const nodeFields = {
     id: data.CountyCode,
     name: data.CountyName
@@ -65,14 +66,58 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
 
     data.forEach(item => {
       item.CountyCode = item.CountyCode.trim();
-      nodes.push(createHealthService(item));
-      nodes.push(createCounty(item));
+      nodes.push(createHealthServiceNode(item));
+      nodes.push(createCountyNode(item));
     });
 
     nodes.forEach(item => {
       createNode(item);
     });
   }
+};
+
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  const { createPage } = boundActionCreators;
+
+  return new Promise((resolve, reject) => {
+    const countyTemplate = path.resolve(`src/templates/county.js`);
+    resolve(
+      graphql(
+        `
+          {
+            allCounty(sort: { fields: id, order: DESC }) {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+          }
+        `
+      ).then(result => {
+        if (result.errors) {
+          reject(result.errors);
+        }
+
+        result.data.allCounty.edges.forEach(({ node }) => {
+          const countyId = `${node.id}`;
+          console.log(node.id);
+
+          createPage({
+            path: countyId,
+            component: countyTemplate,
+            // If you have a layout component at src/layouts/blog-layout.js
+            layout: `index`,
+            // In your blog post template's graphql query, you can use path
+            // as a GraphQL variable to query for data from the markdown file.
+            context: {
+              countyId
+            }
+          });
+        });
+      })
+    );
+  });
 };
 
 const COUNTIES = [
