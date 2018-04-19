@@ -1,6 +1,58 @@
 const fetch = require("node-fetch");
 const crypto = require("crypto");
 
+createHealthService = data => {
+  const nodeFields = {
+    id: data.OrganizationNumber,
+    name: data.DisplayName,
+    location: {
+      street: data.VisitAddressStreet,
+      town: data.VisitAddressPostName,
+      municipality: data.MunicipalityName,
+      county: data.CountyName,
+      countyCode: data.CountyCode,
+      lat: data.Latitude,
+      lng: data.Longitude
+    },
+    phone: data.Phone,
+    openingHours: {
+      hours: data.OpeningHours,
+      comment: data.OpeningHoursComment
+    }
+  };
+  return {
+    ...nodeFields,
+    parent: null,
+    children: [],
+    internal: {
+      type: `HealthService`,
+      contentDigest: crypto
+        .createHash(`md5`)
+        .update(JSON.stringify(nodeFields))
+        .digest(`hex`)
+    }
+  };
+};
+
+createCounty = data => {
+  const nodeFields = {
+    id: data.CountyCode,
+    name: data.CountyName
+  };
+  return {
+    ...nodeFields,
+    parent: null,
+    children: [],
+    internal: {
+      type: `County`,
+      contentDigest: crypto
+        .createHash(`md5`)
+        .update(JSON.stringify(nodeFields))
+        .digest(`hex`)
+    }
+  };
+};
+
 exports.sourceNodes = async ({ boundActionCreators }) => {
   const { createNode } = boundActionCreators;
 
@@ -9,35 +61,16 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
       `http://data.helsenorge.no/healthservices?$top=100&$filter=substringof('${countyId}',CountyCode)`
     );
     const data = await response.json();
+    const nodes = [];
 
     data.forEach(item => {
-      createNode({
-        id: item.OrganizationNumber,
-        name: item.DisplayName,
-        location: {
-          street: item.VisitAddressStreet,
-          town: item.VisitAddressPostName,
-          municipality: item.MunicipalityName,
-          county: item.CountyName,
-          countyCode: parseInt(item.CountyCode),
-          lat: item.Latitude,
-          lng: item.Longitude
-        },
-        phone: item.Phone,
-        openingHours: {
-          hours: item.OpeningHours,
-          comment: item.OpeningHoursComment
-        },
-        parent: null,
-        children: [],
-        internal: {
-          type: `HealthService`,
-          contentDigest: crypto
-            .createHash(`md5`)
-            .update(JSON.stringify(item))
-            .digest(`hex`)
-        }
-      });
+      item.CountyCode = item.CountyCode.trim();
+      nodes.push(createHealthService(item));
+      nodes.push(createCounty(item));
+    });
+
+    nodes.forEach(item => {
+      createNode(item);
     });
   }
 };
