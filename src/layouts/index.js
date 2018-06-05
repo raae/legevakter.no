@@ -87,7 +87,7 @@ export const query = graphql`
       }
     }
     healthServices: allHealthService(
-      sort: { fields: [location___countyCode], order: DESC }
+      sort: { fields: [location___countyCode, name], order: DESC }
     ) {
       edges {
         node {
