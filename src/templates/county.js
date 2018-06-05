@@ -3,14 +3,12 @@ import Link from "gatsby-link";
 import { parseOpeningHours, isOpen } from "../helpers/health-service";
 import HealthService from "../components/HealthService";
 
-const CountyPage = ({ allHealthService, ...props }) => {
-  const healthServices = allHealthService.edges.filter(
-    ({ node }) => node.location.countyCode === props.pathContext.countyId
-  );
+const CountyPage = ({ healthServices, ...props }) => {
+  const now = new Date();
+
   return (
     <div>
       {healthServices.map(({ node }, index) => {
-        const now = new Date();
         if (!Array.isArray(node.openingHours.hours)) {
           const parsedHours = parseOpeningHours(node.openingHours.hours, now);
           node.openingHours.hours = parsedHours;

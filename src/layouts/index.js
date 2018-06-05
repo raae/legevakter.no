@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import { matchPath } from "react-router";
 import { withStyles } from "material-ui";
 import withRoot from "../withRoot";
 
@@ -28,24 +29,36 @@ const styles = theme => ({
   }
 });
 
-const TemplateWrapper = ({ data, children, classes, ...props }) => (
-  <div className={classes.root}>
-    <Helmet>
-      <meta name="title" content={data.site.siteMetadata.title} />
-      <meta name="description" content={data.site.siteMetadata.description} />
-      <meta name="keywords" content={data.site.siteMetadata.keywords} />
-    </Helmet>
+const TemplateWrapper = ({ data, children, classes, ...props }) => {
+  const match = matchPath(props.location.pathname, {
+    path: "/:countyId",
+    exact: true,
+    strict: false
+  });
 
-    <main className={classes.main}>
-      <Header />
-      {children({ ...props, allHealthService: data.allHealthService })}
-    </main>
+  const countyId = match && match.params ? match.params.countyId : undefined;
 
-    <div className={classes.map}>
-      {<Map allHealthService={data.allHealthService} />}
+  const healthServices = data.healthServices.edges.filter(
+    ({ node }) => node.location.countyCode === countyId
+  );
+
+  return (
+    <div className={classes.root}>
+      <Helmet>
+        <meta name="title" content={data.site.siteMetadata.title} />
+        <meta name="description" content={data.site.siteMetadata.description} />
+        <meta name="keywords" content={data.site.siteMetadata.keywords} />
+      </Helmet>
+
+      <main className={classes.main}>
+        <Header />
+        {children({ ...props, healthServices })}
+      </main>
+
+      <div className={classes.map}>{<Map {...{ healthServices }} />}</div>
     </div>
-  </div>
-);
+  );
+};
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func
@@ -60,7 +73,9 @@ export const query = graphql`
         keywords
       }
     }
-    allHealthService(sort: { fields: [location___countyCode], order: DESC }) {
+    healthServices: allHealthService(
+      sort: { fields: [location___countyCode], order: DESC }
+    ) {
       edges {
         node {
           name
