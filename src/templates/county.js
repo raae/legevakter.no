@@ -2,12 +2,27 @@ import React from "react";
 import Link from "gatsby-link";
 import { parseOpeningHours, isOpen } from "../helpers/health-service";
 import HealthService from "../components/HealthService";
+import { Typography, withStyles } from "material-ui";
 
-const CountyPage = ({ healthServices, ...props }) => {
+const styles = theme => ({
+  back: {
+    margin: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 4}px`,
+    display: "flex",
+    alignItems: "center"
+  }
+});
+
+const CountyPage = ({ healthServices, classes }) => {
   const now = new Date();
 
   return (
     <div>
+      <div className={classes.back}>
+        <Typography component={Link} to="/">
+          ← Tilbake til fylkesoversikt
+        </Typography>
+      </div>
+
       {healthServices.map(({ node }, index) => {
         if (!Array.isArray(node.openingHours.hours)) {
           const parsedHours = parseOpeningHours(node.openingHours.hours, now);
@@ -22,4 +37,4 @@ const CountyPage = ({ healthServices, ...props }) => {
   );
 };
 
-export default CountyPage;
+export default withStyles(styles)(CountyPage);
