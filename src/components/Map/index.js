@@ -69,7 +69,8 @@ class Map extends React.Component {
     markerLatLngs.forEach(latLng => bbox.extend(latLng));
 
     this.map.fitBounds(bbox, {
-      padding: { top: 50, bottom: 20, left: 50, right: 50 }
+      padding: { top: 50, bottom: 20, left: 50, right: 50 },
+      maxZoom: 15
     });
 
     newMarkers.forEach(marker => {
