@@ -1,21 +1,13 @@
 import React from "react";
 import Link from "gatsby-link";
 import { parseOpeningHours, isOpen } from "../helpers/health-service";
-import HealthService from "../components/HealthService";
+import County from "../components/County";
 
-const AppPage = ({ healthServices }) => {
+const AppPage = ({ healthServices, counties }) => {
   return (
     <div>
-      {healthServices.map(({ node }, index) => {
-        const now = new Date();
-        if (!Array.isArray(node.openingHours.hours)) {
-          const parsedHours = parseOpeningHours(node.openingHours.hours, now);
-          node.openingHours.hours = parsedHours;
-        }
-        const open = isOpen(node.openingHours.hours, now);
-        node.openingHours.open = open;
-
-        return <HealthService key={index} {...node} />;
+      {counties.map(({ node }, index) => {
+        return <County key={index} county={node} />;
       })}
     </div>
   );

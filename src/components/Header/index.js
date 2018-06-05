@@ -31,7 +31,7 @@ const styles = theme => ({
   }
 });
 
-const Header = ({ classes }) => (
+const Header = ({ name, classes }) => (
   <AppBar position="sticky">
     <Toolbar className={classes.toolbar}>
       <IconButton
@@ -43,14 +43,8 @@ const Header = ({ classes }) => (
       >
         <LocalHospitalIcon className={classes.logo} />
       </IconButton>
-      <Typography
-        className={classes.title}
-        variant="title"
-        color="inherit"
-        component={Link}
-        to="/"
-      >
-        Legevakter i Norge
+      <Typography className={classes.title} variant="title" color="inherit">
+        Legevakter i {name}
       </Typography>
       <IconButton
         className={classes.menu}

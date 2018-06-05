@@ -42,6 +42,9 @@ const TemplateWrapper = ({ data, children, classes, ...props }) => {
     ({ node }) => node.location.countyCode === countyId
   );
 
+  const counties = data.counties.edges;
+  const selectedCounty = counties.find(({ node }) => node.id === countyId);
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -51,11 +54,13 @@ const TemplateWrapper = ({ data, children, classes, ...props }) => {
       </Helmet>
 
       <main className={classes.main}>
-        <Header />
-        {children({ ...props, healthServices })}
+        <Header name={selectedCounty ? selectedCounty.node.name : "Norge"} />
+        {children({ ...props, healthServices, counties })}
       </main>
 
-      <div className={classes.map}>{<Map {...{ healthServices }} />}</div>
+      <div className={classes.map}>
+        {<Map {...{ healthServices, counties }} />}
+      </div>
     </div>
   );
 };
@@ -71,6 +76,14 @@ export const query = graphql`
         title
         description
         keywords
+      }
+    }
+    counties: allCounty(sort: { fields: [id], order: DESC }) {
+      edges {
+        node {
+          id
+          name
+        }
       }
     }
     healthServices: allHealthService(
