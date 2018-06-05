@@ -105,14 +105,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
           createPage({
             path: countyId,
-            component: countyTemplate,
-            // If you have a layout component at src/layouts/blog-layout.js
-            layout: `index`,
-            // In your blog post template's graphql query, you can use path
-            // as a GraphQL variable to query for data from the markdown file.
-            context: {
-              countyId
-            }
+            component: countyTemplate
           });
         });
       })

@@ -13,51 +13,71 @@ const styles = theme => ({
 });
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lng: 17,
-      lat: 65,
-      zoom: 4
-    };
+  map = undefined;
+  markers = [];
+  flyToOptions = {
+    center: [17, 65],
+    zoom: 4
+  };
+
+  componentDidUpdate() {
+    this.updateMap();
   }
 
   componentDidMount() {
+    this.initMap();
+    this.updateMap();
+  }
+
+  initMap() {
     mapboxgl.accessToken = constants.mapBoxAccessToken;
 
-    const { lng, lat, zoom } = this.state;
-    const { allHealthService } = this.props;
-
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v9",
-      center: [lng, lat],
-      zoom
+      ...this.flyToOptions
     });
 
-    map.addControl(
+    this.map.addControl(
       new mapboxgl.NavigationControl({
         showCompass: false
       })
     );
+  }
 
-    map.on("move", () => {
-      const { lng, lat } = map.getCenter();
+  updateMap() {
+    const { healthServices } = this.props;
 
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      });
+    const markerLatLngs = healthServices
+      .filter(({ node }) => node.location.lng && node.location.lat)
+      .map(({ node }) => [node.location.lng, node.location.lat]);
+
+    this.markers.forEach(marker => {
+      marker.remove();
     });
 
-    allHealthService.edges.forEach(({ node }) => {
-      if (node.location.lng && node.location.lat) {
-        new mapboxgl.Marker()
-          .setLngLat([node.location.lng, node.location.lat])
-          .addTo(map);
-      }
+    if (markerLatLngs.length === 0) {
+      this.map.flyTo(this.flyToOptions);
+      return;
+    }
+
+    const newMarkers = markerLatLngs.map(latLng =>
+      new mapboxgl.Marker().setLngLat(latLng)
+    );
+
+    const bbox = new mapboxgl.LngLatBounds();
+    markerLatLngs.forEach(latLng => bbox.extend(latLng));
+
+    this.map.fitBounds(bbox, {
+      padding: { top: 50, bottom: 20, left: 50, right: 50 },
+      maxZoom: 15
     });
+
+    newMarkers.forEach(marker => {
+      marker.addTo(this.map);
+    });
+
+    this.markers = newMarkers;
   }
 
   render() {
