@@ -78,7 +78,7 @@ export const query = graphql`
         keywords
       }
     }
-    counties: allCounty(sort: { fields: [id], order: DESC }) {
+    counties: allCounty(sort: { fields: [sortOrder], order: DESC }) {
       edges {
         node {
           id
