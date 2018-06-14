@@ -45,6 +45,12 @@ const TemplateWrapper = ({ data, children, classes, ...props }) => {
   const counties = data.counties.edges;
   const selectedCounty = counties.find(({ node }) => node.id === countyId);
 
+  const countyClicked = countyId => {
+    if (countyId) {
+      props.history.push(`${countyId}`);
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -59,7 +65,7 @@ const TemplateWrapper = ({ data, children, classes, ...props }) => {
       </main>
 
       <div className={classes.map}>
-        {<Map {...{ healthServices, counties }} />}
+        {<Map {...{ healthServices, counties, countyClicked }} />}
       </div>
     </div>
   );
