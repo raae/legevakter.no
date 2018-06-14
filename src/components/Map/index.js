@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { withPrefix } from "gatsby-link";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { withStyles } from "material-ui";
@@ -31,18 +32,56 @@ class Map extends React.Component {
 
   initMap() {
     mapboxgl.accessToken = constants.mapBoxAccessToken;
+    const { counties, countyClicked } = this.props;
 
-    this.map = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v9",
       ...this.flyToOptions
     });
 
-    this.map.addControl(
+    map.on("load", () => {
+      counties.forEach(county => {
+        const countyId = county.node.id;
+        map.addLayer({
+          id: `${countyId}`,
+          type: "fill",
+          source: {
+            type: "geojson",
+            data: withPrefix(`/geojson/${countyId}.json`)
+          },
+          layout: {},
+          paint: {
+            "fill-color": "#088",
+            "fill-opacity": 0.6,
+            "fill-outline-color": "#FFF"
+          }
+        });
+
+        map.on("click", `${countyId}`, e => {
+          countyClicked(countyId);
+        });
+
+        map.on("mouseenter", `${countyId}`, e => {
+          this.hoverCountyId = `${countyId}`;
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", `${countyId}`, e => {
+          if (this.hoverCountyId === `${countyId}`) {
+            map.getCanvas().style.cursor = "";
+          }
+        });
+      });
+    });
+
+    map.addControl(
       new mapboxgl.NavigationControl({
         showCompass: false
       })
     );
+
+    this.map = map;
   }
 
   updateMap() {

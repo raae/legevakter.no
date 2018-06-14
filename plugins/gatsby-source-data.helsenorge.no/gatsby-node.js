@@ -38,7 +38,8 @@ createHealthServiceNode = data => {
 createCountyNode = data => {
   const nodeFields = {
     id: data.CountyCode,
-    name: data.CountyName
+    name: data.CountyName,
+    sortOrder: data.SortOrder
   };
   return {
     ...nodeFields,
@@ -66,6 +67,11 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
 
     data.forEach(item => {
       item.CountyCode = item.CountyCode.trim();
+      item.SortOrder = item.CountyCode.trim();
+      if (item.CountyCode === "16" || item.CountyCode === "17") {
+        item.CountyCode = "50";
+        item.CountyName = "Trøndelag";
+      }
       nodes.push(createHealthServiceNode(item));
       nodes.push(createCountyNode(item));
     });
@@ -85,7 +91,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       graphql(
         `
           {
-            allCounty(sort: { fields: id, order: DESC }) {
+            allCounty(sort: { fields: sortOrder, order: DESC }) {
               edges {
                 node {
                   id
@@ -101,7 +107,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
         result.data.allCounty.edges.forEach(({ node }) => {
           const countyId = `${node.id}`;
-          console.log(node.id);
 
           createPage({
             path: countyId,
@@ -129,8 +134,8 @@ const COUNTIES = [
   "12",
   "14",
   "15",
-  // "16" No longer in use
-  // "17" No longer in use
+  "16", // Sør-Trøndelag, No longer in use
+  "17", // Nord-Trøndelag, No longer in use
   "18",
   "19",
   "20",
